@@ -3,7 +3,7 @@ import random
 from redis.exceptions import RedisError
 
 # 需要修改ip
-POOL = redis.ConnectionPool(decode_responses=True, max_connections=10, password='wangkaixin', host='114.132.65.185', port=6379, )
+POOL = redis.ConnectionPool(decode_responses=True, max_connections=10, host='127.0.0.1', port=6379, )
 CONN = redis.Redis(connection_pool=POOL,)
 
 

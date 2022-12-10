@@ -89,7 +89,13 @@ class ArticleContentApi(BaseViewApi):
         redis_key = res_variable.article_key % article_id  # 缓存的key
         val = rec.redis_get_val(redis_key)
         if val:
-            res.data = json.loads(val)
+            '''每次点击都会添加阅读量'''
+            rec.article_num_update(article_id)  # 将文章的key进行存储
+            key = 'article_read_num_%s' % article_id
+            article_read_num = rec.redis_get_val(key)
+            data = json.loads(val)
+            data['article_read_num'] = article_read_num
+            res.data = data
             res.code = status.HTTP_200_OK
             return Response(res.dict)
         else:

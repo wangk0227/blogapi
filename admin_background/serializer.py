@@ -69,11 +69,12 @@ class ArticleSerializers(serializers.ModelSerializer):
     class Meta:
         model = models.Article
         fields = ['id', 'create_date_time', 'update_date_time', 'article_category_name', 'content', 'title',
-                  'article_category', 'order', 'excerpt', 'recommend_state']
+                  'article_category', 'order', 'excerpt', 'recommend_state', 'header']
         extra_kwargs = {
             'order': {'write_only': True},  # 只写 不读
             'content': {'write_only': True},
-            'article_category': {'write_only': True}
+            'article_category': {'write_only': True},
+            'header': {'write_only': True},  # 只写 不读
         }
 
     def get_create_date_time(self, obj):
@@ -97,7 +98,7 @@ class ArticleSerializers(serializers.ModelSerializer):
 class ArticleUpdateSerializers(serializers.ModelSerializer):
     class Meta:
         model = models.Article
-        fields = ['id', 'title', 'excerpt', 'order', 'recommend_state', 'content', 'article_category','header']
+        fields = ['id', 'title', 'excerpt', 'order', 'recommend_state', 'content', 'article_category', 'header']
 
 
 class ArticleMessageSerializers(serializers.ModelSerializer):
